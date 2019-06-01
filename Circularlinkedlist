@@ -1,0 +1,110 @@
+public class Main
+{
+	public static void main(String[] args) {
+	    LinkedList list=new LinkedList();
+	    list.addToEmpty(6);
+	    list.addToLast(9);
+	    list.addToBegin(5);
+	    list.addToLast(8);
+	    list.addAfter(7,5);
+	    list.addAfter(2,9);
+      list.deleteAtIndex(2);
+	    list.deleteAtStart();
+	    list.deleteEnd();
+	    list.show();
+	}
+}
+class Node
+{
+    int data;
+    Node next;
+}
+class LinkedList
+{
+Node last=null;
+public void addToEmpty(int data)
+{
+    if(last==null)
+    {
+    Node n=new Node();
+    n.data=data;
+    last=n;
+    last.next=last;
+    }
+}
+public void addToBegin(int data)
+{
+    
+    Node temp=new Node();
+    temp.data=data;
+    temp.next=last.next;
+    last.next=temp;
+}
+public void addToLast(int data)
+{
+if(last==null){addToEmpty(data);}
+    Node temp=new Node();
+    temp.data=data;
+    temp.next=last.next;
+    last.next=temp;
+    last=temp;
+}
+public void addAfter(int data,int index)
+{
+        if(last==null){addToEmpty(data);}
+else
+{
+    Node temp=new Node();temp.data=data;
+    Node p;
+    p=last.next;
+    while(p.data!=index)
+    {
+        p=p.next;
+    }temp.next=p.next;p.next=temp;
+}
+}
+public void deleteAtIndex(int index)
+{
+Node p;
+p=last.next;
+    Node temp=null;
+    for(int i=0;i<index-1;i++)
+    {
+     p=p.next;   
+    }
+    temp=p.next;
+    p.next=temp.next;temp=null;
+}
+public void deleteAtStart()
+{
+if(last!=null)
+{
+    Node p=last.next;
+    last.next=p.next;}
+}
+public void deleteEnd()
+{
+ if(last!=null)
+ {
+  Node p;p=last.next;
+  while(p.next!=last)
+  {
+      p=p.next;
+  }p.next=last.next;
+ }
+}
+public void show()
+{
+    Node p;
+    if(last==null){System.out.println("empty");}
+    else
+    {
+        p=last.next;
+        do
+        {
+            System.out.println(p.data);p=p.next;
+        }while(p!=last.next);
+    }
+}
+ 
+}
